@@ -3,6 +3,8 @@ document.title = "T360 Assignment"
 let root = document.getElementById("root");
 let br = document.createElement("br");
 
+
+
 // Connecting CSS
 let link = document.createElement( "link" );
 link.href = "style.css";
@@ -10,6 +12,8 @@ link.type = "text/css";
 link.rel = "stylesheet";
 link.media = "screen,print";
 document.getElementsByTagName( "head" )[0].appendChild( link );
+
+
 
 // Section 1: Creating Navbar
 let navbar = document.createElement("div");
@@ -32,8 +36,13 @@ navbar.appendChild(displayUserName);
 navbar.appendChild(loginButton);
 
 
+
 // Section 2: Creating Home Page
 let homePage = document.createElement("div");
+homePage.classList.add("home");
+let p1 = document.createElement("p");
+p1.innerHTML = "Home";
+homePage.appendChild(p1);
 
 
 // Section 3: Creating Form 1
@@ -57,19 +66,19 @@ firstName.setAttribute("placeholder", "First Name");
 let lastname = document.createElement("input");
 lastname.setAttribute("type", "text");
 lastname.setAttribute("name", "Lastname");
-firstName.setAttribute("id", "lastname");
+lastname.setAttribute("id", "lastname");
 lastname.setAttribute("placeholder", "Last Name");
 
 let phoneNumber = document.createElement("input");
 phoneNumber.setAttribute("type", "number");
 phoneNumber.setAttribute("name", "PhoneNumber");
-firstName.setAttribute("id", "phonenumber");
+phoneNumber.setAttribute("id", "phonenumber");
 phoneNumber.setAttribute("placeholder", "Phone Number");
 
 let emailId = document.createElement("input");
 emailId.setAttribute("type", "email");
 emailId.setAttribute("name", "Email");
-firstName.setAttribute("id", "email");
+emailId.setAttribute("id", "email");
 emailId.setAttribute("placeholder", "Email");
 
 let form1Submit = document.createElement("input");
@@ -89,6 +98,7 @@ form1.appendChild(br.cloneNode()); form1.appendChild(br.cloneNode());
 form1.appendChild(form1Submit);
                  
 form1Div.appendChild(form1);
+
 
 
 // Section 4: Creating Form 2
@@ -125,6 +135,7 @@ form2Submit.classList.add("form-button");
 form2Submit.setAttribute("type", "submit");
 form2Submit.setAttribute("value", "Next");
 
+
 form2.appendChild(form2Heading);
 form2.appendChild(aadhar);
 form2.appendChild(br.cloneNode()); form2.appendChild(br.cloneNode());
@@ -134,6 +145,7 @@ form2.appendChild(form2Back);
 form2.appendChild(form2Submit);
                  
 form2Div.appendChild(form2);
+
 
 
 // Section 5: Creating Form 3
@@ -210,8 +222,8 @@ form3.appendChild(form3Submit);
 form3Div.appendChild(form3);
 
 
-// Section 6: Creating Login Form
 
+// Section 6: Creating Login Form
 
 let loginDiv = document.createElement("div");
 loginDiv.classList.add("form");
@@ -227,12 +239,14 @@ let userName = document.createElement("input");
 userName.setAttribute("type", "text");
 userName.setAttribute("name", "UserName");
 userName.setAttribute("id", "userName");
+userName.setAttribute("required", "");
 userName.setAttribute("placeholder", "User Name");
 
 let password = document.createElement("input");
-password.setAttribute("type", "text");
+password.setAttribute("type", "password");
 password.setAttribute("name", "password");
 password.setAttribute("id", "password");
+password.setAttribute("required", "");
 password.setAttribute("placeholder", "Last Name");
 
 let loginSubmit = document.createElement("input");
@@ -251,12 +265,148 @@ loginDiv.appendChild(login);
 
 
 
+// Section 7: Whole Details
+
+let detailsPage = document.createElement("div");
+let data = document.createElement('p')
+data.innerHTML = "Data";
+detailsPage.appendChild(data);
+
+
+
+// Working Logic
+loginButton.addEventListener("click", function(e){
+    homePage.removeChild(homePage.firstChild)
+    homePage.appendChild(loginDiv);
+})
+
+form1Submit.addEventListener("click", function(e) {
+    e.preventDefault();
+    let flag = 1;
+    let firstName1 = document.getElementById("firstname").value;
+    console.log(firstName1)
+    if(!firstName1){
+        alert("Enter First Name")
+        flag = 0
+    }
+    let lastName1 = document.getElementById("lastname").value;
+    if(!lastName1){
+        flag = 0
+        alert("Enter Last Name")
+    }
+    let phonenumber1 = document.getElementById("phonenumber").value;
+    if(!phonenumber1){
+        flag = 0
+        alert("Enter Phone Number")
+    }
+    let email1 = document.getElementById("email").value;
+    if(!email1){
+        flag = 0
+        alert("Enter Email")
+    }
+
+    let step1Details = {'firstName': firstName1, 'lastName': lastName1, 'phoneNumber': phonenumber1, 'email':email1}
+    if(flag === 1){
+        localStorage.setItem('step1Details', JSON.stringify(step1Details));
+        homePage.removeChild(homePage.firstChild)
+        homePage.appendChild(form2Div); 
+    }
+    
+})
+
+form2Back.addEventListener("click", function(e) {
+    e.preventDefault();
+    homePage.removeChild(homePage.firstChild)
+    homePage.appendChild(form1Div);
+});
+
+form2Submit.addEventListener("click", function(e) {
+    e.preventDefault();
+    let flag = 1;
+    let aadhar1 = document.getElementById("aadhar").value;
+    if(!aadhar1){
+        flag = 0
+        alert("Enter Aadhar Number")
+    }
+    let panId1 = document.getElementById("panId").value;
+    if(!panId1){
+        flag = 0
+        alert("Enter Pan Id")
+    }
+
+    let step2Details = {'aadhar': aadhar, 'panId1': panId1}
+    if(flag === 1){
+        localStorage.setItem('step2Details', JSON.stringify(step2Details));
+        homePage.removeChild(homePage.firstChild)
+        homePage.appendChild(form3Div); 
+    }
+    
+})
+
+form3Back.addEventListener("click", function(e) {
+    e.preventDefault();
+    homePage.removeChild(homePage.firstChild)
+    homePage.appendChild(form2Div);
+});
+
+form3Submit.addEventListener("click", function(e) {
+    e.preventDefault();
+    let flag = 1;
+    let aline1 = document.getElementById("line1").value;
+    let aline2 = document.getElementById("line2").value;
+    if(!aline1){
+        flag = 0
+        alert("Enter Address Line 1")
+    }
+    let city1 = document.getElementById("city").value;
+    if(!city1){
+        flag = 0
+        alert("Enter City")
+    }
+    let pincode1 = document.getElementById("pincode").value;
+    if(!pincode1){
+        flag = 0
+        alert("Enter Pincode")
+    }
+    let state1 = document.getElementById("state").value;
+
+    let step3Details = {'line1': aline1, 'line2': aline2, 'city': city1, 'state': state1, 'pincode': pincode1}
+    if(flag === 1){
+        localStorage.setItem('step3Details', JSON.stringify(step3Details));
+        homePage.removeChild(homePage.firstChild)
+        homePage.appendChild(detailsPage); 
+    }
+    
+})
+
+loginSubmit.addEventListener("click", function(e) {
+    e.preventDefault();
+    flag = 1
+    let userName1 = document.getElementById("userName").value;
+    if(!userName1){
+        flag = 0
+        alert("Enter Username")
+    }
+    let password1 = document.getElementById("password").value;
+    if(!password1){
+        flag = 0
+        alert("Enter Password")
+    }
+    let userLoginDetails = {'userName' : userName1, 'password': password1 }
+    if(flag === 1){
+        localStorage.setItem('userLoginDetails', JSON.stringify(userLoginDetails));
+        homePage.removeChild(homePage.firstChild)
+        homePage.appendChild(form1Div); 
+    }
+})
+
+
 
 // Adding Elements to Home Page
-homePage.appendChild(loginDiv);
-homePage.appendChild(form1Div);
-homePage.appendChild(form2Div);
-homePage.appendChild(form3Div);
+// homePage.appendChild(loginDiv);
+// homePage.appendChild(form1Div);
+// homePage.appendChild(form2Div);
+// homePage.appendChild(form3Div);
 
 root.appendChild(navbar);
 root.appendChild(homePage);
