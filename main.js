@@ -40,10 +40,15 @@ let homePage = document.createElement("div");
 
 let form1Div = document.createElement("div");
 form1Div.classList.add("form");
-form1Div.classList.add("form1Div");
+form1Div.classList.add("msform");
 
 let form1Heading = document.createElement("h3")
-form1Heading.innerHTML = "Step 1 out of 3"
+form1Heading.classList.add("fs-title")
+form1Heading.innerHTML = "Personel Details"
+
+let form1SubHeading = document.createElement("h3")
+form1SubHeading.classList.add("fs-subtitle")
+form1SubHeading.innerHTML = "Step 1 out of 3"
 
 let form1 = document.createElement("form");
 form1.setAttribute("method", "post");
@@ -78,6 +83,7 @@ form1Submit.setAttribute("type", "submit");
 form1Submit.setAttribute("value", "Next");
 
 form1.appendChild(form1Heading);
+form1.appendChild(form1SubHeading);
 form1.appendChild(firstName);
 form1.appendChild(br.cloneNode()); form1.appendChild(br.cloneNode());
 form1.appendChild(lastname);
@@ -95,10 +101,15 @@ form1Div.appendChild(form1);
 
 let form2Div = document.createElement("div");
 form2Div.classList.add("form");
-form2Div.classList.add("form2Div");
+form2Div.classList.add("msform");
 
 let form2Heading = document.createElement("h3")
-form2Heading.innerHTML = "Step 2 out of 3"
+form2Heading.classList.add("fs-title")
+form2Heading.innerHTML = "Government Details"
+
+let form2SubHeading = document.createElement("h3")
+form2SubHeading.classList.add("fs-subtitle")
+form2SubHeading.innerHTML = "Step 2 out of 3"
 
 let form2 = document.createElement("form");
 form2.setAttribute("method", "post");
@@ -126,6 +137,8 @@ form2Submit.setAttribute("type", "submit");
 form2Submit.setAttribute("value", "Next");
 
 form2.appendChild(form2Heading);
+form2.appendChild(form2SubHeading);
+
 form2.appendChild(aadhar);
 form2.appendChild(br.cloneNode()); form2.appendChild(br.cloneNode());
 form2.appendChild(panId);
@@ -140,10 +153,15 @@ form2Div.appendChild(form2);
 
 let form3Div = document.createElement("div");
 form3Div.classList.add("form");
-form3Div.classList.add("form3Div");
+form3Div.classList.add("msform");
 
 let form3Heading = document.createElement("h3")
-form3Heading.innerHTML = "Step 3 out of 3"
+form3Heading.classList.add("fs-title")
+form3Heading.innerHTML = "Address Details"
+
+let form3SubHeading = document.createElement("h3")
+form3SubHeading.classList.add("fs-subtitle")
+form3SubHeading.innerHTML = "Step 3 out of 3"
 
 let form3 = document.createElement("form");
 form3Div.setAttribute("method", "post");
@@ -194,6 +212,8 @@ form3Submit.setAttribute("type", "submit");
 form3Submit.setAttribute("value", "Submit");
 
 form3.appendChild(form3Heading);
+form3.appendChild(form3SubHeading);
+
 form3.appendChild(line1);
 form3.appendChild(br.cloneNode()); form3.appendChild(br.cloneNode());
 form3.appendChild(line2);
@@ -215,10 +235,11 @@ form3Div.appendChild(form3);
 
 let loginDiv = document.createElement("div");
 loginDiv.classList.add("form");
-loginDiv.classList.add("loginDiv");
+loginDiv.classList.add("msform");
 
 let loginHeading = document.createElement("h3")
 loginHeading.innerHTML = "Login"
+loginDiv.classList.add("fs-title");
 
 let login = document.createElement("form");
 login.setAttribute("method", "post");
