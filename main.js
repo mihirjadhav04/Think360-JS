@@ -334,7 +334,7 @@ form2Submit.addEventListener("click", function(e) {
         alert("Enter Pan Id")
     }
 
-    let step2Details = {'aadhar': aadhar, 'panId1': panId1}
+    let step2Details = {'aadhar': aadhar1, 'panId1': panId1}
     if(flag === 1){
         localStorage.setItem('step2Details', JSON.stringify(step2Details));
         homePage.removeChild(homePage.firstChild)
@@ -387,16 +387,19 @@ loginSubmit.addEventListener("click", function(e) {
         flag = 0
         alert("Enter Username")
     }
+
     let password1 = document.getElementById("password").value;
     if(!password1){
         flag = 0
         alert("Enter Password")
     }
-    let userLoginDetails = {'userName' : userName1, 'password': password1 }
-    if(flag === 1){
-        localStorage.setItem('userLoginDetails', JSON.stringify(userLoginDetails));
+
+    if(userName1 === "think360" && password1 === "123456"){
         homePage.removeChild(homePage.firstChild)
         homePage.appendChild(form1Div); 
+    }
+    else{
+        alert("Wrong Credentials");
     }
 })
 
