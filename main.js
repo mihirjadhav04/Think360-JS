@@ -38,12 +38,20 @@ logoutButton.innerHTML = "Logout";
 navbar.appendChild(logo);
 navbar.appendChild(loginButton);
 
+
+
 // Section 2: Creating Home Page
 let homePage = document.createElement("div");
 homePage.classList.add("home");
 let p1 = document.createElement("p");
 p1.innerHTML = "Home";
 homePage.appendChild(p1);
+
+
+// Getting Step Details
+let getStep1Details = JSON.parse(localStorage.getItem('step1Details'))
+let getStep2Details = JSON.parse(localStorage.getItem('step2Details'))
+let getStep3Details = JSON.parse(localStorage.getItem('step3Details'))
 
 
 // Section 3: Creating Form 1
@@ -68,24 +76,36 @@ firstName.setAttribute("type", "text");
 firstName.setAttribute("name", "FirstName");
 firstName.setAttribute("id", "firstname");
 firstName.setAttribute("placeholder", "First Name");
+if(getStep1Details && getStep1Details['firstName']){
+    firstName.setAttribute("value", getStep1Details['firstName']);
+}
 
 let lastname = document.createElement("input");
 lastname.setAttribute("type", "text");
 lastname.setAttribute("name", "Lastname");
 lastname.setAttribute("id", "lastname");
 lastname.setAttribute("placeholder", "Last Name");
+if(getStep1Details && getStep1Details['lastName']){
+    lastname.setAttribute("value", getStep1Details['lastName']);
+}
 
 let phoneNumber = document.createElement("input");
 phoneNumber.setAttribute("type", "number");
 phoneNumber.setAttribute("name", "PhoneNumber");
 phoneNumber.setAttribute("id", "phonenumber");
 phoneNumber.setAttribute("placeholder", "Phone Number");
+if(getStep1Details && getStep1Details['phoneNumber']){
+    phoneNumber.setAttribute("value", getStep1Details['phoneNumber']);
+}
 
 let emailId = document.createElement("input");
 emailId.setAttribute("type", "email");
 emailId.setAttribute("name", "Email");
 emailId.setAttribute("id", "email");
 emailId.setAttribute("placeholder", "Email");
+if(getStep1Details && getStep1Details['email']){
+    emailId.setAttribute("value", getStep1Details['email']);
+}
 
 let form1Submit = document.createElement("input");
 form1Submit.classList.add("form-button");
@@ -129,12 +149,18 @@ aadhar.setAttribute("type", "text");
 aadhar.setAttribute("name", "Aadhar");
 aadhar.setAttribute("id", "aadhar");
 aadhar.setAttribute("placeholder", "Aadhar No.");
+if(getStep2Details && getStep2Details['aadhar']){
+    aadhar.setAttribute("value", getStep2Details['aadhar']);
+}
 
 let panId = document.createElement("input");
 panId.setAttribute("type", "text");
 panId.setAttribute("name", "Pan");
 panId.setAttribute("id", "panId");
 panId.setAttribute("placeholder", "Pan Card Number");
+if(getStep2Details && getStep2Details['panId']){
+    panId.setAttribute("value", getStep2Details['panId']);
+}
 
 let form2Back = document.createElement("input");
 form2Back.classList.add("form-button");
@@ -181,22 +207,32 @@ line1.setAttribute("type", "text");
 line1.setAttribute("name", "line1");
 line1.setAttribute("id", "line1");
 line1.setAttribute("placeholder", "Address Line1");
+if(getStep3Details && getStep3Details['line1']){
+    line1.setAttribute("value", getStep3Details['line1']);
+}
 
 let line2 = document.createElement("input");
 line2.setAttribute("type", "text");
 line2.setAttribute("name", "line2");
 line2.setAttribute("id", "line2");
 line2.setAttribute("placeholder", "Address Line2");
+if(getStep3Details && getStep3Details['line2']){
+    line2.setAttribute("value", getStep3Details['line2']);
+}
 
 let city = document.createElement("input");
 city.setAttribute("type", "text");
 city.setAttribute("name", "city");
 city.setAttribute("id", "city");
 city.setAttribute("placeholder", "City");
+if(getStep3Details && getStep3Details['city']){
+    city.setAttribute("value", getStep3Details['city']);
+}
 
 let states = ["Mahashtra", "Goa", "Assam", "Gujarat"]
 let state = document.createElement("select");
 state.setAttribute("id", "state");
+
 
 for (let i = 0; i < states.length; i++) {
     let option = document.createElement("option");
@@ -205,11 +241,18 @@ for (let i = 0; i < states.length; i++) {
     state.appendChild(option);
 }
 
+if(getStep3Details && getStep3Details['state']){
+    state.setAttribute("value", getStep3Details['state']);
+}
+
 let pincode = document.createElement("input");
 pincode.setAttribute("type", "text");
 pincode.setAttribute("name", "pincode");
 pincode.setAttribute("id", "pincode");
 pincode.setAttribute("placeholder", "pincode");
+if(getStep3Details && getStep3Details['pincode']){
+    pincode.setAttribute("value", getStep3Details['pincode']);
+}
 
 let form3Back = document.createElement("input");
 form3Back.classList.add("form-button");
@@ -264,7 +307,7 @@ password.setAttribute("type", "password");
 password.setAttribute("name", "password");
 password.setAttribute("id", "password");
 password.setAttribute("required", "");
-password.setAttribute("placeholder", "Last Name");
+password.setAttribute("placeholder", "Password");
 
 let loginSubmit = document.createElement("input");
 loginSubmit.classList.add("form-button");
@@ -285,34 +328,58 @@ loginDiv.appendChild(login);
 // Section 7: Whole Details
 
 let detailsPage = document.createElement("div");
+let editDetail = document.createElement('button');
+editDetail.innerHTML = "Edit"
+editDetail.classList.add("edit-button");
+editDetail.addEventListener('click', function(){
+    homePage.removeChild(homePage.firstChild)
+    homePage.appendChild(form1Div);
+})
+
+
 let detailsTable = document.createElement("table");
 
-let getStep1Details = JSON.parse(localStorage.getItem('step1Details'))
-console.log(getStep1Details)
-
 for (let key in getStep1Details){
-    let p = document.createElement('p')
-    p.innerHTML = key + ": " + getStep1Details[key]
-    detailsPage.appendChild(p)
-}
 
-let getStep2Details = JSON.parse(localStorage.getItem('step2Details'))
+    let tr = document.createElement("tr")
+    let td1 = document.createElement("td")
+    let td2 = document.createElement("td")
+    td1.innerHTML = key;
+    td2.innerHTML = getStep1Details[key];
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    detailsTable.appendChild(tr);
+
+    // let p = document.createElement('p')
+    // p.innerHTML = key + ": " + getStep1Details[key]
+    // detailsPage.appendChild(p)
+}
 
 for (let key in getStep2Details){
-    let p = document.createElement('p')
-    p.innerHTML = key + ": " + getStep2Details[key]
-    detailsPage.appendChild(p)
+    let tr = document.createElement("tr")
+    let td1 = document.createElement("td")
+    let td2 = document.createElement("td")
+    td1.innerHTML = key;
+    td2.innerHTML = getStep2Details[key];
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    detailsTable.appendChild(tr);
 }
-
-let getStep3Details = JSON.parse(localStorage.getItem('step3Details'))
 
 for (let key in getStep3Details){
-    let p = document.createElement('p')
-    p.innerHTML = key + ": " + getStep3Details[key]
-    detailsPage.appendChild(p)
+    let tr = document.createElement("tr")
+    let td1 = document.createElement("td")
+    let td2 = document.createElement("td")
+    td1.innerHTML = key;
+    td2.innerHTML = getStep3Details[key];
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    detailsTable.appendChild(tr);
 }
 
+detailsPage.appendChild(editDetail)
 detailsPage.appendChild(detailsTable);
+
 
 
 
@@ -384,7 +451,7 @@ form2Submit.addEventListener("click", function(e) {
         alert("Enter Pan Id")
     }
 
-    let step2Details = {'aadhar': aadhar1, 'panId1': panId1}
+    let step2Details = {'aadhar': aadhar1, 'panId': panId1}
     if(flag === 1){
         localStorage.setItem('step2Details', JSON.stringify(step2Details));
         homePage.removeChild(homePage.firstChild)
