@@ -30,12 +30,13 @@ let loginButton = document.createElement("button");
 loginButton.classList.add("loginButton");
 loginButton.innerHTML = "Login";
 
+let logoutButton = document.createElement("button");
+logoutButton.classList.add("logoutButton");
+logoutButton.innerHTML = "Logout";
+
 //Adding Elements to Navbar
 navbar.appendChild(logo);
-navbar.appendChild(displayUserName);
 navbar.appendChild(loginButton);
-
-
 
 // Section 2: Creating Home Page
 let homePage = document.createElement("div");
@@ -49,10 +50,15 @@ homePage.appendChild(p1);
 
 let form1Div = document.createElement("div");
 form1Div.classList.add("form");
-form1Div.classList.add("form1Div");
+form1Div.classList.add("msform");
 
 let form1Heading = document.createElement("h3")
-form1Heading.innerHTML = "Step 1 out of 3"
+form1Heading.classList.add("fs-title");
+form1Heading.innerHTML = "Personal Details"
+
+let form1SubHeading = document.createElement("h3")
+form1SubHeading.classList.add("fs-title");
+form1SubHeading.innerHTML = "Step 1 out of 3"
 
 let form1 = document.createElement("form");
 form1.setAttribute("method", "post");
@@ -105,10 +111,15 @@ form1Div.appendChild(form1);
 
 let form2Div = document.createElement("div");
 form2Div.classList.add("form");
-form2Div.classList.add("form2Div");
+form2Div.classList.add("msform");
 
 let form2Heading = document.createElement("h3")
-form2Heading.innerHTML = "Step 2 out of 3"
+form2Heading.classList.add("fs-title");
+form2Heading.innerHTML = "Government Details"
+
+let form2SubHeading = document.createElement("h3")
+form2SubHeading.classList.add("fs-title");
+form2SubHeading.innerHTML = "Step 2 out of 3"
 
 let form2 = document.createElement("form");
 form2.setAttribute("method", "post");
@@ -152,10 +163,15 @@ form2Div.appendChild(form2);
 
 let form3Div = document.createElement("div");
 form3Div.classList.add("form");
-form3Div.classList.add("form3Div");
+form3Div.classList.add("msform");
 
 let form3Heading = document.createElement("h3")
-form3Heading.innerHTML = "Step 3 out of 3"
+form3Heading.classList.add("fs-title");
+form3Heading.innerHTML = "Address Details"
+
+let form3SubHeading = document.createElement("h3")
+form3SubHeading.classList.add("fs-title");
+form3SubHeading.innerHTML = "Step 3 out of 3"
 
 let form3 = document.createElement("form");
 form3Div.setAttribute("method", "post");
@@ -227,10 +243,11 @@ form3Div.appendChild(form3);
 
 let loginDiv = document.createElement("div");
 loginDiv.classList.add("form");
-loginDiv.classList.add("loginDiv");
+loginDiv.classList.add("msform");
 
 let loginHeading = document.createElement("h3")
 loginHeading.innerHTML = "Login"
+loginDiv.classList.add("fs-title");
 
 let login = document.createElement("form");
 login.setAttribute("method", "post");
@@ -268,9 +285,10 @@ loginDiv.appendChild(login);
 // Section 7: Whole Details
 
 let detailsPage = document.createElement("div");
-let data = document.createElement('p')
-data.innerHTML = "Data";
-detailsPage.appendChild(data);
+let pt = document.createElement('p');
+pt.innerHTML = "Deatils"
+
+detailsPage.appendChild(pt);
 
 
 
@@ -278,6 +296,14 @@ detailsPage.appendChild(data);
 loginButton.addEventListener("click", function(e){
     homePage.removeChild(homePage.firstChild)
     homePage.appendChild(loginDiv);
+})
+
+logoutButton.addEventListener("click", function(e){
+    homePage.removeChild(homePage.firstChild)
+    homePage.appendChild(loginDiv);
+    navbar.removeChild(logoutButton)
+    navbar.removeChild(displayUserName)
+    navbar.appendChild(loginButton)
 })
 
 form1Submit.addEventListener("click", function(e) {
@@ -395,21 +421,25 @@ loginSubmit.addEventListener("click", function(e) {
     }
 
     if(userName1 === "think360" && password1 === "123456"){
+        navbar.removeChild(loginButton)
+        displayUserName.innerHTML = userName1;
+        navbar.appendChild(displayUserName)
+        navbar.appendChild(logoutButton)
         homePage.removeChild(homePage.firstChild)
-        homePage.appendChild(form1Div); 
+        if(!localStorage.getItem("step1Details"))
+            homePage.appendChild(form1Div); 
+        else if(!localStorage.getItem("step2Details"))
+            homePage.appendChild(form2Div);
+        else if(!localStorage.getItem("step3Details"))
+            homePage.appendChild(form3Div);
+        else
+            homePage.appendChild(detailsPage);
     }
     else{
         alert("Wrong Credentials");
     }
 })
 
-
-
-// Adding Elements to Home Page
-// homePage.appendChild(loginDiv);
-// homePage.appendChild(form1Div);
-// homePage.appendChild(form2Div);
-// homePage.appendChild(form3Div);
 
 root.appendChild(navbar);
 root.appendChild(homePage);
