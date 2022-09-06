@@ -285,10 +285,34 @@ loginDiv.appendChild(login);
 // Section 7: Whole Details
 
 let detailsPage = document.createElement("div");
-let pt = document.createElement('p');
-pt.innerHTML = "Deatils"
+let detailsTable = document.createElement("table");
 
-detailsPage.appendChild(pt);
+let getStep1Details = JSON.parse(localStorage.getItem('step1Details'))
+console.log(getStep1Details)
+
+for (let key in getStep1Details){
+    let p = document.createElement('p')
+    p.innerHTML = key + ": " + getStep1Details[key]
+    detailsPage.appendChild(p)
+}
+
+let getStep2Details = JSON.parse(localStorage.getItem('step2Details'))
+
+for (let key in getStep2Details){
+    let p = document.createElement('p')
+    p.innerHTML = key + ": " + getStep2Details[key]
+    detailsPage.appendChild(p)
+}
+
+let getStep3Details = JSON.parse(localStorage.getItem('step3Details'))
+
+for (let key in getStep3Details){
+    let p = document.createElement('p')
+    p.innerHTML = key + ": " + getStep3Details[key]
+    detailsPage.appendChild(p)
+}
+
+detailsPage.appendChild(detailsTable);
 
 
 
