@@ -19,9 +19,11 @@ body {
 /*form styles*/
 .msform {
   width: 400px;
+  padding: 5em 3em;
   margin: 50px auto;
   text-align: center;
   position: relative;
+  background-color: #fff;
 }
 /* .msform fieldset { */
   /* background: white;
