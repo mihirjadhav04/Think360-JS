@@ -17,13 +17,14 @@ document.getElementsByTagName( "head" )[0].appendChild( link );
 
 // Section 1: Creating Navbar
 let navbar = document.createElement("div");
+navbar.classList.add("navbar");
 
 let logo = document.createElement("span");
 logo.classList.add("logo");
 logo.innerHTML = "Think360 Vanilla JS";
 
-let displayUserName = document.createElement("span");
-displayUserName.classList.add("displayUserName");
+// let displayUserName = document.createElement("span");
+// displayUserName.classList.add("displayUserName");
 //displayUserName.innerHTML = "Think360 Vanilla JS";
 
 let loginButton = document.createElement("button");
@@ -328,6 +329,8 @@ loginDiv.appendChild(login);
 // Section 7: Whole Details
 
 let detailsPage = document.createElement("div");
+detailsPage.classList.add("detailsPage");
+
 let editDetail = document.createElement('button');
 editDetail.innerHTML = "Edit"
 editDetail.classList.add("edit-button");
@@ -338,6 +341,15 @@ editDetail.addEventListener('click', function(){
 
 
 let detailsTable = document.createElement("table");
+
+    let tr1 = document.createElement("tr")
+    let td01 = document.createElement("td")
+    let td02 = document.createElement("td")
+    td01.innerHTML = "Heading";
+    td02.innerHTML = "Information";
+    tr1.appendChild(td01);
+    tr1.appendChild(td02);
+    detailsTable.appendChild(tr1);
 
 for (let key in getStep1Details){
 
@@ -393,7 +405,8 @@ logoutButton.addEventListener("click", function(e){
     homePage.removeChild(homePage.firstChild)
     homePage.appendChild(loginDiv);
     navbar.removeChild(logoutButton)
-    navbar.removeChild(displayUserName)
+    logo.innerHTML = "Think360 Vanilla JS"
+    //navbar.removeChild(displayUserName)
     navbar.appendChild(loginButton)
 })
 
@@ -513,8 +526,8 @@ loginSubmit.addEventListener("click", function(e) {
 
     if(userName1 === "think360" && password1 === "123456"){
         navbar.removeChild(loginButton)
-        displayUserName.innerHTML = userName1;
-        navbar.appendChild(displayUserName)
+        logo.innerHTML = "Hello, " + userName1;
+        //navbar.appendChild(displayUserName)
         navbar.appendChild(logoutButton)
         homePage.removeChild(homePage.firstChild)
         if(!localStorage.getItem("step1Details"))
